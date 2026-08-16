@@ -20,7 +20,7 @@ import os
 import sys
 from xml.etree import ElementTree as ET
 
-from PyQt6 import QtWidgets
+from PyQt5 import QtWidgets
 
 from . import Analysis
 from . import Convert
@@ -59,8 +59,13 @@ class MainWindow(QtWidgets.QWidget):
         # Track the dynamically created widget of KicadtoNgspice Window
         self.obj_track = TrackWidget.TrackWidget()
 
-        # Reset all shared class-level state for this conversion run
-        TrackWidget.TrackWidget.reset()
+        # Clear Dictionary/List item of sub circuit and Ngspice model
+        # Dictionary
+        self.obj_track.subcircuitList.clear()
+        self.obj_track.subcircuitTrack.clear()
+        self.obj_track.model_entry_var.clear()
+        # List
+        self.obj_track.modelTrack[:] = []
 
         # Object of Processing
         obj_proc = PrcocessNetlist()
@@ -127,7 +132,7 @@ class MainWindow(QtWidgets.QWidget):
             self.content = "Your schematic contain unknown model " + \
                            ', '.join(unknownModelList)
             self.msg.showMessage(self.content)
-            self.msg.exec()
+            self.msg.exec_()
 
         elif multipleModelList:
             self.msg = QtWidgets.QErrorMessage()
@@ -137,7 +142,7 @@ class MainWindow(QtWidgets.QWidget):
             modelParamXML directory " + \
                             ', '.join(multipleModelList[0])
             self.msg.showMessage(self.mcontent)
-            self.msg.exec()
+            self.msg.exec_()
 
         else:
             self.createMainWindow()
@@ -607,13 +612,8 @@ class MainWindow(QtWidgets.QWidget):
             end = obj_devicemodel.devicemodel_dict_end[device]
 
             while it <= end:
-                widget = obj_devicemodel.entry_var[it]
-                # Handle both QComboBox (uses currentText) and QLineEdit (uses text)
-                if hasattr(widget, 'currentText'):
-                    widget_text = str(widget.currentText())
-                else:
-                    widget_text = str(widget.text())
-                ET.SubElement(attr_var, "field").text = widget_text
+                ET.SubElement(attr_var, "field").text = \
+                    str(obj_devicemodel.entry_var[it].text())
                 it = it + 1
 
         # Writing Subcircuit values
@@ -772,7 +772,7 @@ class MainWindow(QtWidgets.QWidget):
             self.msg = "The KiCad to Ngspice conversion completed "
             self.msg += "successfully!"
             QtWidgets.QMessageBox.information(
-                self, "Information", self.msg, QtWidgets.QMessageBox.StandardButton.Ok
+                self, "Information", self.msg, QtWidgets.QMessageBox.Ok
             )
         except Exception as e:
             print("Exception Message: ", e)

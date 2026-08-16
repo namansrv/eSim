@@ -16,9 +16,8 @@
 #      REVISION: Sunday 16 August 2020
 # =========================================================================
 
-from PyQt6 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 import subprocess
-import shlex
 from configuration.Appconfig import Appconfig
 
 
@@ -108,11 +107,11 @@ class WorkerThread(QtCore.QThread):
                 'Please select the project first. You can either ' +
                 'create a new project or open an existing project.'
             )
-            msg.exec()
+            msg.exec_()
 
             return
 
-        proc = subprocess.Popen(shlex.split(command))
+        proc = subprocess.Popen(command.split())
 
         if 'nghdl' in command:
             return
