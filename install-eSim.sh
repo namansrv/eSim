@@ -48,6 +48,7 @@ run_version_script() {
             ;;
         "25.04")
             SCRIPT="$SCRIPT_DIR/install-eSim-25.04.sh"
+            echo "using 25.04 script"
             ;;
             
         *)

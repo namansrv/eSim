@@ -69,8 +69,11 @@ function installNghdl
 
     # Do not trap on error of any command. Let NGHDL script handle its own errors.
     trap "" ERR
+    
+    echo "Opening up NGHDL script"
 
     ./install-nghdl.sh --install       # Install NGHDL
+    
         
     # Set trap again to error_exit function to exit on errors
     trap error_exit ERR
@@ -133,7 +136,7 @@ function installKicad
                 fi
             else
                 echo "KiCad 9.0 is already installed."
-                exit 0
+                return 0
             fi
         fi
 
