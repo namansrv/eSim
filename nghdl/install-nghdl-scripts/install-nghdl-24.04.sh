@@ -75,6 +75,7 @@ function installDependency
     echo "Installing libxaw7-dev...................................."
     sudo apt install -y libxaw7-dev
 
+
     echo "Installing dependencies for $verilator...................."
     if [[ -n "$(which apt 2> /dev/null)" ]]
     then
@@ -151,6 +152,7 @@ function installVerilator
 
 function installNGHDL
 {
+
     echo "Installing NGHDL........................................"
 
     # Extracting NGHDL to Home Directory

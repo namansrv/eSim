@@ -49,12 +49,6 @@
     #include <netinet/in.h>
     #include <netdb.h>
     #include <syslog.h>
-#elif __APPLE__
-    #include <sys/socket.h>
-    #include <arpa/inet.h>
-    #include <netinet/in.h>
-    #include <netdb.h>
-    #include <syslog.h>
 #elif _WIN32
     #include <ws2tcpip.h>
     #include <winsock2.h>
@@ -204,8 +198,7 @@ static int create_server(int port_number, char my_ip[], int max_connections)
 
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	// serv_addr.sin_addr.s_addr = inet_addr(my_ip); // 26.Sept.2019 - RP - Bind to specific IP only
+	serv_addr.sin_addr.s_addr = inet_addr(my_ip); // 26.Sept.2019 - RP - Bind to specific IP only
 	serv_addr.sin_port = htons(port_number);
 
 	if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)

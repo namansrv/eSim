@@ -8,6 +8,7 @@ port(C : in std_logic;
      Q : out std_logic);
 end pwmdecrement;
 
+
 architecture bhv of pwmdecrement is
         signal count: integer:=0;       
         signal alpha: integer:=0;  --counts number of clocks

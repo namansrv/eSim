@@ -112,16 +112,16 @@ function installKicad
     ubuntu_version=$(lsb_release -rs)
 
     # Define KiCad PPAs based on Ubuntu version
-    if [[ "$ubuntu_version" == "24.04" ]]; then
-        echo "Ubuntu 24.04 detected."
-        kicadppa="kicad/kicad-8.0-releases"
+    if [[ "$ubuntu_version" == "25.04" ]]; then
+        echo "Ubuntu 25.04 detected."
+        kicadppa="kicad/kicad-9.0-releases"
 
         # Check if KiCad is installed using dpkg-query for the main package
         if dpkg -s kicad &>/dev/null; then
             installed_version=$(dpkg-query -W -f='${Version}' kicad | cut -d'.' -f1)
-            if [[ "$installed_version" != "8" ]]; then
+            if [[ "$installed_version" != "9" ]]; then
                 echo "A different version of KiCad ($installed_version) is installed."
-                read -p "Do you want to remove it and install KiCad 8.0? (yes/no): " response
+                read -p "Do you want to remove it and install KiCad 9.0? (yes/no): " response
 
                 if [[ "$response" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
                     echo "Removing KiCad $installed_version..."
@@ -132,7 +132,7 @@ function installKicad
                     exit 1
                 fi
             else
-                echo "KiCad 8.0 is already installed."
+                echo "KiCad 9.0 is already installed."
                 exit 0
             fi
         fi
@@ -231,15 +231,15 @@ function copyKicadLibrary
     #Extract custom KiCad Library
     tar -xJf library/kicadLibrary.tar.xz
 
-    if [ -d ~/.config/kicad/6.0 ];then
+    if [ -d ~/.config/kicad/9.0 ];then
         echo "kicad config folder already exists"
     else 
-        echo ".config/kicad/6.0 does not exist"
-        mkdir -p ~/.config/kicad/6.0
+        echo ".config/kicad/9.0 does not exist"
+        mkdir -p ~/.config/kicad/9.0
     fi
 
     # Copy symbol table for eSim custom symbols 
-    cp kicadLibrary/template/sym-lib-table ~/.config/kicad/6.0/
+    cp kicadLibrary/template/sym-lib-table ~/.config/kicad/9.0/
     echo "symbol table copied in the directory"
 
     # Copy KiCad symbols made for eSim
@@ -417,7 +417,7 @@ elif [ $option == "--uninstall" ];then
         sudo apt purge -y kicad kicad-footprints kicad-libraries kicad-symbols kicad-templates
         sudo rm -rf /usr/share/kicad
 	sudo rm /etc/apt/sources.list.d/kicad*
-        rm -rf $HOME/.config/kicad/6.0
+        rm -rf $HOME/.config/kicad/9.0
 
         echo "Removing Virtual env......................."
         sudo rm -r $config_dir/env

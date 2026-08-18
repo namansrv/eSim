@@ -1083,16 +1083,7 @@ class ModelGeneration:
         start_server.write("chmod 775 sock_pkg_create.sh &&\n")
         start_server.write("./sock_pkg_create.sh $1 $2 &&\n")
         start_server.write("ghdl -i *.vhdl &&\n")
-        #start_server.write("ghdl -a *.vhdl &&\n")
-        #=============================================
-        # Modified to compile in the required order
-        #=============================================
-
-        start_server.write("ghdl -a Utility_Package.vhdl &&\n")
-        start_server.write("ghdl -a Vhpi_Package.vhdl &&\n")
-        start_server.write("ghdl -a sock_pkg.vhdl &&\n")
-
-        #=============================================
+        start_server.write("ghdl -a *.vhdl &&\n")
         start_server.write("ghdl -a " + self.fname + " &&\n")
         start_server.write(
             "ghdl -a " + self.fname.split('.')[0] + "_tb.vhdl  &&\n"
@@ -1104,9 +1095,18 @@ class ModelGeneration:
                                self.fname.split('.')[0] + "_tb &&\n")
             start_server.write("./" + self.fname.split('.')[0] + "_tb.exe")
         else:
-            start_server.write("ghdl -e -Wl,ghdlserver.o " + self.fname.split('.')[0] + "_tb &&\n")
-            start_server.write("./" + self.fname.split('.')[0] + "_tb --vcd=" + self.fname.split('.')[0] + "_tb.vcd\n")
-            start_server.write( "gtkwave " + self.fname.split('.')[0] + "_tb.vcd 2>/dev/null")
+            start_server.write("ghdl -e -Wl,ghdlserver.o " +
+                               self.fname.split('.')[0] + "_tb &&\n")
+            start_server.write(
+                "./" +
+                self.fname.split('.')[0] +
+                "_tb --vcd=" +
+                self.fname.split('.')[0] +
+                "_tb.vcd\n")
+            start_server.write(
+                "gtkwave " +
+                self.fname.split('.')[0] +
+                "_tb.vcd 2>/dev/null")
 
         start_server.close()
 
