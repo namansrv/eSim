@@ -1,7 +1,15 @@
 **Author:** namansrv
+
+
 **Branch:** [`installers`](https://github.com/namansrv/eSim/tree/installers)[cite: 1]
+
+
 **Environment:** Ubuntu 25.04 (Plucky Puffin), tested in a virtual machine( [`Boxes`](https://flathub.org/en/apps/org.gnome.Boxes) )
+
+
 **Task:** eSim Semester Long Internship — Autumn 2026, Task 4 (eSim Upgradation)
+
+
 
 **Number of issues reported:** 6
 **Number of issues fixed:** 6
