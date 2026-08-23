@@ -62,7 +62,7 @@ With this in place, the script now actually started running on 25.04
 Once the dispatcher worked, the script reached the KiCad install step and failed with a 404 while adding the PPA:
 
   
-
+```bash
 Installing KiCad................................
 Adding KiCad PPA to local apt repository: kicad/kicad-6.0-releases
 PPA publishes dbgsym, you may need to include 'main/debug' component
@@ -101,6 +101,7 @@ N: See apt-secure(8) manpage for repository creation and user configuration deta
 Error! Kindly resolve above error(s) and try again.
 
 Aborting Installation...
+```
 
   **What I tried:** I worked backwards from the newest KiCad release and landed on **KiCad 9** (`kicad-9.0-releases`) . It's the newest KiCad line that actually has a published Ubuntu 25.04 build.
 
