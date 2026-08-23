@@ -191,8 +191,8 @@ function installDependency
     echo "Installing Psutil.........................."
     sudo apt-get install -y python3-psutil
     
-    echo "Installing PyQt5..........................."
-    sudo apt-get install -y python3-pyqt5
+    echo "Installing PyQt6..........................."
+    sudo apt-get install -y python3-pyqt6
 
     echo "Installing Matplotlib......................"
     sudo apt-get install -y python3-matplotlib
