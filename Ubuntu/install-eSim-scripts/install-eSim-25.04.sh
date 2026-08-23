@@ -231,8 +231,15 @@ function installDependency
 function copyKicadLibrary
 {
 
-    #Extract custom KiCad Library
-    tar -xJf library/kicadLibrary.tar.xz
+    # Extract custom KiCad Library only if the tar file exists
+    if [ -f "library/kicadLibrary.tar.xz" ]; then
+        tar -xJf library/kicadLibrary.tar.xz
+    fi
+
+    # Check if the extracted directory exists before proceeding
+    if [ ! -d "kicadLibrary" ]; then
+        echo "Error: kicadLibrary directory not found! Skipping copy to avoid crash."
+    else
 
     if [ -d ~/.config/kicad/9.0 ];then
         echo "kicad config folder already exists"
@@ -259,6 +266,7 @@ function copyKicadLibrary
 
     #Change ownership from Root to the User
     sudo chown -R $USER:$USER /usr/share/kicad/symbols/
+	fi
 
 }
 
