@@ -137,8 +137,27 @@ Since I changed the actual KiCad version being installed, I also had to update e
 With KiCad finally working, the script moved on to NGHDL's dependencies and immediately hit:
 
   
+``` bash
+Installing Clang.......................................
+clang is already the newest version (1:20.0-63ubuntu1).
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+Installing Zlib1g-dev...................................
+zlib1g-dev is already the newest version (1:1.3.dfsg+really1.3.1-1ubuntu1).
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+Installing Gtk Canberra modules.........................
+Package libcanberra-gtk-module is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
 
-![[Pasted image 20260822230917.png]]
+Error: Package 'libcanberra-gtk-module' has no installation candidate
+
+
+Error! Kindly resolve above error(s) and try again.
+
+Aborting Installation...
+```
 
   
 
@@ -169,7 +188,43 @@ Past the dependency stage, the script started extracting and building GHDL from 
 
   
 
-![[Pasted image 20260822231207.png]]
+```bash
+ghdl-4.1.0/testsuite/vpi/vpi001/testsuite.sh
+ghdl-4.1.0/testsuite/vpi/vpi001/vpi1.c
+ghdl-4.1.0/testsuite/vpi/vpi002/
+ghdl-4.1.0/testsuite/vpi/vpi002/mydesign.vhdl
+ghdl-4.1.0/testsuite/vpi/vpi002/testsuite.sh
+ghdl-4.1.0/testsuite/vpi/vpi002/vpi1.c
+ghdl-4.1.0/testsuite/vpi/vpi003/
+ghdl-4.1.0/testsuite/vpi/vpi003/mydesign.vhdl
+ghdl-4.1.0/testsuite/vpi/vpi003/testsuite.sh
+ghdl-4.1.0/testsuite/vpi/vpi003/vpi1.c
+ghdl-4.1.0/testsuite/vpi/vpi004/
+ghdl-4.1.0/testsuite/vpi/vpi004/mydesign.vhdl
+ghdl-4.1.0/testsuite/vpi/vpi004/testsuite.sh
+ghdl-4.1.0/testsuite/vpi/vpi004/vpi1.c
+ghdl-4.1.0/testsuite/vpi/vpi005/
+ghdl-4.1.0/testsuite/vpi/vpi005/mydesign.vhdl
+ghdl-4.1.0/testsuite/vpi/vpi005/testsuite.sh
+ghdl-4.1.0/testsuite/vpi/vpi005/vpi1.c
+ghdl-4.1.0/testsuite/vpi/vpi005/vpi2.c
+ghdl-4.1.0 successfully extracted
+Changing directory to ghdl-4.1.0 installation
+Configuring ghdl-4.1.0 build as per requirements
+gcc (Ubuntu 14.2.0-19ubuntu2) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Use full IEEE library
+Build machine is: x86_64-linux-gnu
+Unhandled version llvm 20.1.2
+
+
+Error! Kindly resolve above error(s) and try again.
+
+Aborting Installation...
+```
 
   
 
@@ -190,7 +245,29 @@ This switches the build to `mcode`, which built successfully with no further cha
 
   
 
-![[Pasted image 20260822232600.png]]
+```bash
+  -e "s#@REF@#${GHDL_VER_REF:-$VER_REF}#" \
+  -e "s#@HASH@#${GHDL_VER_HASH:-$VER_HASH}#" \
+  < src/version.in > version.tmp;
+if [ ! -r version.ads ] || ! cmp version.tmp version.ads > /dev/null; then cp version.tmp version.ads; fi
+gnatmake -o ghdl_mcode -gnat12 -aI./src -aI./src/vhdl -aI./src/verilog -aI./src/synth -aI./src/grt -aI./src/psl -aI./src/vhdl/translate -aI./src/ghdldrv -aI./src/ortho -aI./src/ortho/mcode -aI./src/synth -aI./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A ghdl_jit.adb -bargs -static -largs memsegs_c.o jumps.o times.o grt-cstdio.o grt-cgnatrts.o grt-no_sundials_c.o grt-cvpi.o grt-cvhpi.o grt-cdynload.o fstapi.o lz4.o fastlz.o  -ldl -lm -Wl,--version-script=/home/namansrv/eSim-test/nghdl/ghdl-4.1.0/./src/grt/grt.ver -Wl,--export-dynamic  -shared-libgcc
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdl_jit.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdllib.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdllocal.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdlmain.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdlrun.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A ghdlsynth_maybe.ads
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdlvpi.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A default_paths.ads
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ghdldrv/ghdlcovout.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ortho/mcode/ortho_jit.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/ortho/mcode/ortho_nodes.ads
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/simul/simul-vhdl_compile.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/vhdl/translate/trans.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/vhdl/translate/trans-coverage.adb
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/vhdl/translate/trans_decls.ads
+x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/vhdl/translate/trans_link.adb
+```
 
   
 
