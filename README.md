@@ -63,7 +63,44 @@ Once the dispatcher worked, the script reached the KiCad install step and failed
 
   
 
-![[Pasted image 20260822230409.png]]
+Installing KiCad................................
+Adding KiCad PPA to local apt repository: kicad/kicad-6.0-releases
+PPA publishes dbgsym, you may need to include 'main/debug' component
+Repository: 'Types: deb
+URIs: https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu/
+Suites: resolute
+Components: main
+'
+Description:
+Official KiCad 6.0 releases
+More info: https://launchpad.net/~kicad/+archive/ubuntu/kicad-6.0-releases
+Adding repository.
+Hit:1 http://in.archive.ubuntu.com/ubuntu resolute InRelease
+Hit:2 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:3 http://in.archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:4 http://in.archive.ubuntu.com/ubuntu resolute-backports InRelease
+Ign:5 https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute InRelease
+Err:6 https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute Release
+  404  Not Found [IP: 185.125.189.186 443]
+Reading package lists... Done
+E: The repository 'https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+Hit:1 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:2 http://in.archive.ubuntu.com/ubuntu resolute InRelease
+Hit:3 http://in.archive.ubuntu.com/ubuntu resolute-updates InRelease
+Ign:4 https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute InRelease
+Hit:5 http://in.archive.ubuntu.com/ubuntu resolute-backports InRelease
+Err:6 https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute Release
+  404  Not Found [IP: 185.125.189.186 443]
+Reading package lists... Done
+E: The repository 'https://ppa.launchpadcontent.net/kicad/kicad-6.0-releases/ubuntu resolute Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+
+Error! Kindly resolve above error(s) and try again.
+
+Aborting Installation...
 
   **What I tried:** I worked backwards from the newest KiCad release and landed on **KiCad 9** (`kicad-9.0-releases`) . It's the newest KiCad line that actually has a published Ubuntu 25.04 build.
 
