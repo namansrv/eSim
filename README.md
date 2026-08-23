@@ -277,6 +277,7 @@ x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/syn
 x86_64-linux-gnu-gcc-14 -c -I./ -I./src -I./src/vhdl -I./src/verilog -I./src/synth -I./src/grt -I./src/psl -I./src/vhdl/translate -I./src/ghdldrv -I./src/ortho -I./src/ortho/mcode -I./src/synth -I./src/simul -gnat12 -gnaty3befhkmr -g -gnatwa -gnatwC -gnatf -gnata -gnatw.A -I- /home/namansrv/eSim-test/nghdl/ghdl-4.1.0/src/vhdl/translate/trans_link.adb
 ```
 
+a wall of text like so above is normal
   
 
 
