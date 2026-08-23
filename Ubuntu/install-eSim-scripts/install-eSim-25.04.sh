@@ -223,8 +223,8 @@ function installDependency
     echo "Installing matplotlib................"
     pip3 install matplotlib
 
-    echo "Installing PyQt5............."
-    pip3 install PyQt5  
+    echo "Installing PyQt6............."
+    pip3 install PyQt6  
 }
 
 
